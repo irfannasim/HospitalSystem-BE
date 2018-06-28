@@ -2,10 +2,8 @@ package com.sd.his.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -76,8 +74,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-
-        endpoints.authenticationManager(authenticationManager);
-        endpoints.tokenStore(tokenStore()).approvalStoreDisabled();
+        endpoints.authenticationManager(authenticationManager).tokenStore(tokenStore());
+       // endpoints.tokenStore(tokenStore()).approvalStoreDisabled();
     }
 }

@@ -1,6 +1,6 @@
 package com.sd.his.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.sd.his.request.RoleAndPermissionCreateRequest;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -14,7 +14,7 @@ public class Role implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", unique = true, nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column(name = "NAME")
     @NotNull
@@ -23,11 +23,11 @@ public class Role implements Serializable {
     @Column(name = "DESCRIPTION")
     private String description;
 
-    @Column(name = "IS_ACTIVE", columnDefinition = "boolean default false", nullable = false)
-    private boolean isActive;
+    @Column(name = "IS_ACTIVE", columnDefinition = "boolean default true", nullable = false)
+    private boolean active;
 
     @Column(name = "IS_DELETED", columnDefinition = "boolean default false", nullable = false)
-    private boolean isDeleted;
+    private boolean deleted;
 
     @Column(name = "UPDATED_ON")
     private long updatedOn;
@@ -35,37 +35,39 @@ public class Role implements Serializable {
     @Column(name = "CREATED_ON")
     private long createdOn;
 
-    @ManyToMany
-    @JoinTable(
-            name = "ROLE_PERMISSION",
-            joinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")},
-            inverseJoinColumns = {@JoinColumn(name = "PERMISSION_ID", referencedColumnName = "ID")})
-    private List<Permission> permissions;
+    @OneToMany(targetEntity = UserRole.class, mappedBy = "role", fetch = FetchType.LAZY)
+    private List<UserRole> users;
 
-    @ManyToMany(mappedBy = "role")
-    @JsonBackReference
-    private List<User> users;
+    @OneToMany(targetEntity = RolePermission.class, mappedBy = "role", fetch = FetchType.LAZY)
+    private List<RolePermission> rolePermissions;
 
     public Role() {
     }
 
-    public Role(String name, String description, boolean isActive, boolean isDeleted, long updatedOn,
-                long createdOn, List<Permission> permissions, List<User> users) {
-        this.name = name;
-        this.description = description;
-        this.isActive = isActive;
-        this.isDeleted = isDeleted;
-        this.updatedOn = updatedOn;
-        this.createdOn = createdOn;
-        this.permissions = permissions;
-        this.users = users;
+    public Role(RoleAndPermissionCreateRequest role) {
+        this.name = role.getName();
+        this.description = role.getDescription();
+        this.active = role.isActive();
+        this.createdOn = role.getCreatedOn();
+        this.updatedOn = role.getUpdatedOn();
     }
 
-    public Integer getId() {
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", active=" + active +
+                ", deleted=" + deleted +
+                '}';
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -86,19 +88,19 @@ public class Role implements Serializable {
     }
 
     public boolean isActive() {
-        return isActive;
+        return active;
     }
 
     public void setActive(boolean active) {
-        isActive = active;
+        this.active = active;
     }
 
     public boolean isDeleted() {
-        return isDeleted;
+        return deleted;
     }
 
     public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
+        this.deleted = deleted;
     }
 
     public long getUpdatedOn() {
@@ -117,19 +119,19 @@ public class Role implements Serializable {
         this.createdOn = createdOn;
     }
 
-    public List<Permission> getPermissions() {
-        return permissions;
-    }
-
-    public void setPermissions(List<Permission> permissions) {
-        this.permissions = permissions;
-    }
-
-    public List<User> getUsers() {
+    public List<UserRole> getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(List<UserRole> users) {
         this.users = users;
+    }
+
+    public List<RolePermission> getRolePermissions() {
+        return rolePermissions;
+    }
+
+    public void setRolePermissions(List<RolePermission> rolePermissions) {
+        this.rolePermissions = rolePermissions;
     }
 }

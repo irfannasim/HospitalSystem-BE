@@ -1,6 +1,11 @@
 package com.sd.his.utill;
 
+import com.sd.his.model.EmailTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.time.Instant;
+import java.time.temporal.ChronoField;
+import java.util.Calendar;
 
 /*
  * @author    : irfan nasim
@@ -26,6 +31,17 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  */
 public class Test {
     public static void main(String ...args){
-        System.out.println(new BCryptPasswordEncoder().encode("Password*1"));
+     System.out.println(new BCryptPasswordEncoder().encode("Password*1"));
+
+        Instant instant = Instant.parse( "2018-05-02T19:00:00.000Z");
+        System.out.println(instant);
+
+        System.out.println(instant.toEpochMilli());
+        System.out.println(instant.getEpochSecond());
+        System.out.println(instant.get(ChronoField.MILLI_OF_SECOND));
+
+       // long time= HISCoreUtil.convertDateToMilliSeconds(instant.toString());
+
+
     }
 }

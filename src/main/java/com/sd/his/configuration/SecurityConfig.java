@@ -1,6 +1,7 @@
 package com.sd.his.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,11 +21,13 @@ import org.springframework.security.oauth2.provider.approval.TokenStoreUserAppro
 import org.springframework.security.oauth2.provider.request.DefaultOAuth2RequestFactory;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 import javax.annotation.Resource;
+import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
@@ -51,14 +54,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/v2/api-docs", "/his/oauth/token", "/swagger-ui.html", "his/addpermissions", "his/user", "his/addroles", "/configuration/ui", "/socket/**", "/swagger-resources/**", "/configuration/security", "/swagger-ui.html", "/webjars/**");
+        web.ignoring().antMatchers("/v2/api-docs", "/his/oauth/token", "/swagger-ui.html",
+                "/configuration/ui", "/socket/**", "/swagger-resources/**",
+                "/configuration/security", "/swagger-ui.html", "/webjars/**");
     }
-
-    @Bean
-    public TokenStore tokenStore() {
-        return new InMemoryTokenStore();
-    }
-
     @Bean
     @Autowired
     public TokenStoreUserApprovalHandler userApprovalHandler(TokenStore tokenStore) {

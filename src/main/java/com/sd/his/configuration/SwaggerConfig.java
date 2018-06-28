@@ -83,7 +83,7 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder().title("SolutionDots Systems").description("A visionary organization to convert idea into product.")
                 .termsOfServiceUrl("https://solutiondots.com/").version("1.0.0").build();
-               /* .contact(new Contact("waqas", "http://www.example.com", "waqasrana11@gmail.com"))
+               /* .contact(new Profile("waqas", "http://www.example.com", "waqasrana11@gmail.com"))
                 .license("Open Source").licenseUrl("https://www.example.com").version("1.0.0").build();*/
     }
 }

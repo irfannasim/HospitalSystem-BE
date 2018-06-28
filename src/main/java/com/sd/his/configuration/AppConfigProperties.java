@@ -2,7 +2,7 @@ package com.sd.his.configuration;
 
 
 import com.sd.his.model.Properties;
-import com.sd.his.repositiories.PropertiesRepository;
+import com.sd.his.repositories.PropertiesRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
