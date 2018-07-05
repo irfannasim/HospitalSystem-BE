@@ -1,4 +1,4 @@
-= Spring Boot RestAPI Foundation, Spring OAuth2, Spring DataJPA, MySQL, Spring RestAPI
+= Spring Boot RestAPI Foundation
 
 This is a project contains the following technologies:
 
@@ -36,13 +36,15 @@ First of all in OAuth2 specification we need to get access_token to access resou
 ----
 
 here in above url:
+
 * meaning of `/his` is `context_path` configured in `applicaiton.properties` file
 * meaning of `username` is username which is stored in DB
 * meaning of `password` is password which is stored in DB
 
 * The headers of this call should be 
-	[indent=0]
-	----
-		content_type : application/json
-		authorization: Base64 Encoded string of username:password
-	----
+
+[indent=0]
+----
+	content_type : application/json
+	authorization: Base64 Encoded string of username:password
+----
