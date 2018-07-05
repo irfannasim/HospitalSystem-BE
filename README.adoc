@@ -30,7 +30,7 @@ This is a project contains the following technologies:
 
 == GET Access Token Call
 
-TIP: HTTP Request Type: `POST`
+HTTP Request Type: `POST`
 
 First of all in OAuth2 specification we need to get access_token to access resource (API). For getting access_token you have to follow the below and you can request from any HTTP client like `PostMan`:
 
@@ -63,7 +63,7 @@ here in above url:
 	http://localhost:8080/his/user/get/1
 ----
 
-TIP: HTTP Request Type: `GET`
+HTTP Request Type: `GET`
 
 here in above url:
 
