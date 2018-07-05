@@ -27,6 +27,11 @@ This is a project contains the following technologies:
 
 
 == HOW to RUN / WHERE to START 
+
+== GET Access Token Call
+
+TIP: HTTP Request Type: `POST`
+
 First of all in OAuth2 specification we need to get access_token to access resource (API). For getting access_token you have to follow the below and you can request from any HTTP client like `PostMan`:
 
 * Call to below url
@@ -48,3 +53,69 @@ here in above url:
 	content_type : application/json
 	authorization: Base64 Encoded string of username:password
 ----
+
+== Access to Any Resource (API) 
+
+* Resource URL 
+
+[indent=0]
+----
+	http://localhost:8080/his/user/get/1
+----
+
+TIP: HTTP Request Type: `GET`
+
+here in above url:
+
+* meaning of `/user` is path of the controller --> method (resource / API) which can be found in:
+
+[indent=0]
+----
+	/src/main/java/com/sd/his/controller/UserAPI.java\getUserById();
+----
+
+* meaning of `get` url to get user
+* meaning of `1` it is `id` of the user stored in DB
+
+* The headers of this call should be 
+
+[indent=0]
+----
+	content_type : application/json
+	authorization: Bearer `access_token`
+----
+
+* access_token in above header mean, the access token string which is recieved in response of `http://localhost:8080/his/oauth/token?username=superadmin&password=Password*1&grant_type=password` API call.
+
+Now, you can find the resource from controllers and made calls to other resource with belonging payloads.
+
+If you need API documentation, please refere to below url of swagger documentation UI:
+
+[indent=0]
+----
+	http://localhost:8080/swagger_ui.html
+----
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
