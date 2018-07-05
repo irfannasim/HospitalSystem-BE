@@ -1,0 +1,48 @@
+= Spring Boot RestAPI Foundation, Spring OAuth2, Spring DataJPA, MySQL, Spring RestAPI
+
+This is a project contains the following technologies:
+
+* SpringBoot
+* Spring RestAPI
+* Spring OAuth2
+* Spring DataJPA
+* Swagger UI
+* MySQL
+* WAR and JAR Packaging 
+
+
+== Installation and Getting Started
+
+* Clone the Repository by using below command
+[indent=0]
+----
+	git clone https://github.com/irfannasim/HIS-BE.git
+----
+
+* Import into Intellj Idea as maven project
+* Dependencies will be start downloading
+* Check the database credentials and DB name in applicatoin.properties file
+* Execute the initial sql script from sql folder in your database which contains the OAuth2 configuration tables
+* click on Run button to start 
+
+
+== HOW to RUN / WHERE to START 
+First of all in OAuth2 specification we need to get access_token to access resource (API). For getting access_token you have to follow the below and you can request from any HTTP client like `PostMan`:
+
+* Call to below url
+[indent=0]
+----
+	http://localhost:8080/his/oauth/token?username=superadmin&password=Password*1&grant_type=password
+----
+
+here in above url:
+* meaning of `/his` is `context_path` configured in `applicaiton.properties` file
+* meaning of `username` is username which is stored in DB
+* meaning of `password` is password which is stored in DB
+
+* The headers of this call should be 
+	[indent=0]
+	----
+		content_type : application/json
+		authorization: Base64 Encoded string of username:password
+	----
